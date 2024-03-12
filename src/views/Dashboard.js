@@ -43,6 +43,7 @@ function Dashboard(props) {
   const setBgChartData = (name) => {
     setbigChartData(name);
   };
+  <Row className="justify-content-center align-items-center "></Row>
   return (
     <>
       <div className="content">
@@ -318,6 +319,46 @@ function Dashboard(props) {
             </Card>
           </Col>
         </Row>
+        
+        <Table>
+  <thead>
+    <tr style={{ color: 'white', fontSize: 20 }}>
+      <th style={{ borderBottom: '1px solid white', padding: '10px' }}>GASES</th>
+      <th style={{ borderBottom: '1px solid white', padding: '10px' }}>OPTIMUM VALUE</th>
+      <th style={{ borderBottom: '1px solid white', padding: '10px' }}>DANGEROUS VALUE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>SO2</td>
+      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>20 ppm</div></td>
+      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red' }}>100 ppm</div></td>
+    </tr>
+    <tr>
+      <td>NO2</td>
+      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>40 ppm</div></td>
+      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red' }}>200 ppm</div></td>
+    </tr>
+    <tr>
+      <td>PM2.5</td>
+      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>25 µg/m³</div></td>
+      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red' }}>100 µg/m³</div></td>
+    </tr>
+    <tr>
+      <td>PM10</td>
+      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>50 µg/m³</div></td>
+      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red' }}>250 µg/m³</div></td>
+    </tr>
+    <tr>
+      <td>CO</td>
+      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>10 ppm</div></td>
+      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red' }}>50 ppm</div></td>
+    </tr>
+  </tbody>
+
+
+</Table>
+
       </div>
     </>
   );

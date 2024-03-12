@@ -1,302 +1,52 @@
-/*!
-
-=========================================================
-* Black Dashboard React v1.2.2
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/black-dashboard-react
-* Copyright 2023 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/black-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
-
-// reactstrap components
 import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
 
+// Modified MapWrapper component
 const MapWrapper = () => {
   const mapRef = React.useRef(null);
+
   React.useEffect(() => {
     let google = window.google;
     let map = mapRef.current;
-    let lat = "10.0431";
-    let lng = "76.3243";
-    const myLatlng = new google.maps.LatLng(lat, lng);
+
+    // Coordinates of Kalamassery
+    let kalamasseryCoords = { lat: 10.0395, lng: 76.3152 };
+
+    // Create a new map centered on Kalamassery
     const mapOptions = {
-      center: {lat: 9.9312, lng: 76.2673},
-      zoom: 12, // Default zoom level
-      scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
+      center: kalamasseryCoords,
+      zoom: 12,
+      scrollwheel: false,
       styles: [
-        {
-          elementType: "geometry",
-          stylers: [
-            {
-              color: "#1d2c4d",
-            },
-          ],
-        },
-        {
-          elementType: "labels.text.fill",
-          stylers: [
-            {
-              color: "#8ec3b9",
-            },
-          ],
-        },
-        {
-          elementType: "labels.text.stroke",
-          stylers: [
-            {
-              color: "#1a3646",
-            },
-          ],
-        },
-        {
-          featureType: "administrative.country",
-          elementType: "geometry.stroke",
-          stylers: [
-            {
-              color: "#4b6878",
-            },
-          ],
-        },
-        {
-          featureType: "administrative.land_parcel",
-          elementType: "labels.text.fill",
-          stylers: [
-            {
-              color: "#64779e",
-            },
-          ],
-        },
-        {
-          featureType: "administrative.province",
-          elementType: "geometry.stroke",
-          stylers: [
-            {
-              color: "#4b6878",
-            },
-          ],
-        },
-        {
-          featureType: "landscape.man_made",
-          elementType: "geometry.stroke",
-          stylers: [
-            {
-              color: "#334e87",
-            },
-          ],
-        },
-        {
-          featureType: "landscape.natural",
-          elementType: "geometry",
-          stylers: [
-            {
-              color: "#023e58",
-            },
-          ],
-        },
-        {
-          featureType: "poi",
-          elementType: "geometry",
-          stylers: [
-            {
-              color: "#283d6a",
-            },
-          ],
-        },
-        {
-          featureType: "poi",
-          elementType: "labels.text.fill",
-          stylers: [
-            {
-              color: "#6f9ba5",
-            },
-          ],
-        },
-        {
-          featureType: "poi",
-          elementType: "labels.text.stroke",
-          stylers: [
-            {
-              color: "#1d2c4d",
-            },
-          ],
-        },
-        {
-          featureType: "poi.park",
-          elementType: "geometry.fill",
-          stylers: [
-            {
-              color: "#023e58",
-            },
-          ],
-        },
-        {
-          featureType: "poi.park",
-          elementType: "labels.text.fill",
-          stylers: [
-            {
-              color: "#3C7680",
-            },
-          ],
-        },
-        {
-          featureType: "road",
-          elementType: "geometry",
-          stylers: [
-            {
-              color: "#304a7d",
-            },
-          ],
-        },
-        {
-          featureType: "road",
-          elementType: "labels.text.fill",
-          stylers: [
-            {
-              color: "#98a5be",
-            },
-          ],
-        },
-        {
-          featureType: "road",
-          elementType: "labels.text.stroke",
-          stylers: [
-            {
-              color: "#1d2c4d",
-            },
-          ],
-        },
-        {
-          featureType: "road.highway",
-          elementType: "geometry",
-          stylers: [
-            {
-              color: "#2c6675",
-            },
-          ],
-        },
-        {
-          featureType: "road.highway",
-          elementType: "geometry.fill",
-          stylers: [
-            {
-              color: "#9d2a80",
-            },
-          ],
-        },
-        {
-          featureType: "road.highway",
-          elementType: "geometry.stroke",
-          stylers: [
-            {
-              color: "#9d2a80",
-            },
-          ],
-        },
-        {
-          featureType: "road.highway",
-          elementType: "labels.text.fill",
-          stylers: [
-            {
-              color: "#b0d5ce",
-            },
-          ],
-        },
-        {
-          featureType: "road.highway",
-          elementType: "labels.text.stroke",
-          stylers: [
-            {
-              color: "#023e58",
-            },
-          ],
-        },
-        {
-          featureType: "transit",
-          elementType: "labels.text.fill",
-          stylers: [
-            {
-              color: "#98a5be",
-            },
-          ],
-        },
-        {
-          featureType: "transit",
-          elementType: "labels.text.stroke",
-          stylers: [
-            {
-              color: "#1d2c4d",
-            },
-          ],
-        },
-        {
-          featureType: "transit.line",
-          elementType: "geometry.fill",
-          stylers: [
-            {
-              color: "#283d6a",
-            },
-          ],
-        },
-        {
-          featureType: "transit.station",
-          elementType: "geometry",
-          stylers: [
-            {
-              color: "#3a4762",
-            },
-          ],
-        },
-        {
-          featureType: "water",
-          elementType: "geometry",
-          stylers: [
-            {
-              color: "#0e1626",
-            },
-          ],
-        },
-        {
-          featureType: "water",
-          elementType: "labels.text.fill",
-          stylers: [
-            {
-              color: "#4e6d70",
-            },
-          ],
-        },
+        // Google Map styles
       ],
     };
 
-    map = new google.maps.Map(document.getElementById('map'), mapOptions
-      );
+    map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-    const marker = new google.maps.Marker({
-      position: myLatlng,
+    // Hardcoded coordinates for the sensor location
+    const sensorCoords = { lat: 10.0428, lng: 76.3317 }; // Example coordinates, replace with actual sensor location
+
+    const sensorMarker = new google.maps.Marker({
+      position: sensorCoords,
       map: map,
       animation: google.maps.Animation.DROP,
-      title: "CUSAT",
+      title: "YOU ARE HERE!!!",
     });
 
-    const contentString ="S001";
+    const contentString = "Sensor Location";
 
     const infowindow = new google.maps.InfoWindow({
       content: contentString,
     });
 
-    google.maps.event.addListener(marker, "click", function () {
-      infowindow.open(map, marker);
+    // Show info window when marker is clicked
+    google.maps.event.addListener(sensorMarker, "click", function () {
+      infowindow.open(map, sensorMarker);
     });
   }, []);
-  return <div ref={mapRef} />;
+
+  return <div ref={mapRef} id="map" style={{ height: "400px" }} />;
 };
 
 function Map() {
@@ -325,3 +75,4 @@ function Map() {
 }
 
 export default Map;
+
