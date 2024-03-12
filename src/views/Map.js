@@ -25,10 +25,12 @@ const MapWrapper = () => {
   React.useEffect(() => {
     let google = window.google;
     let map = mapRef.current;
-    let lat = "40.748817";
-    let lng = "-73.985428";
+    let lat = "10.0431";
+    let lng = "76.3243";
     const myLatlng = new google.maps.LatLng(lat, lng);
     const mapOptions = {
+      center: {lat: 9.9312, lng: 76.2673},
+      zoom: 12, // Default zoom level
       scrollwheel: false, //we disable de scroll over the map, it is a really annoing when you scroll through page
       styles: [
         {
@@ -274,18 +276,17 @@ const MapWrapper = () => {
       ],
     };
 
-    map = new google.maps.Map(map, mapOptions);
+    map = new google.maps.Map(document.getElementById('map'), mapOptions
+      );
 
     const marker = new google.maps.Marker({
       position: myLatlng,
       map: map,
       animation: google.maps.Animation.DROP,
-      title: "BLK Design System PRO React!",
+      title: "CUSAT",
     });
 
-    const contentString =
-      '<div class="info-window-content"><h2>BLK Dashboard React</h2>' +
-      "<p>A freebie Admin for ReactStrap, Bootstrap, React, and React Hooks.</p></div>";
+    const contentString ="S001";
 
     const infowindow = new google.maps.InfoWindow({
       content: contentString,
