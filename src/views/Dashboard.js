@@ -46,7 +46,7 @@ function Dashboard(props) {
   return (
     <>
       <div className="content">
-        <Row>
+        <Row className="justify-content-center align-items-center ">
         <Col lg="2" md="2" className="col">
         <Card >
              <CardHeader>
