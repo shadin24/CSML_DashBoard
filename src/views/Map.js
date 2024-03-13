@@ -53,33 +53,4 @@ const MapContainer = ({ apiKey }) => {
   );
 };
 
-<<<<<<< HEAD
-function Map() {
-  return (
-    <>
-      <div className="content">
-        <Row>
-          <Col md="12">
-            <Card className="card-plain">
-              <CardHeader>Google Maps</CardHeader>
-              <CardBody>
-                <div
-                  id="map"
-                  className="map"
-                  style={{ position: "relative", overflow: "hidden" }}
-                >
-                  <MapWrapper />
-                </div>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-      </div>
-    </>
-  );
-}
-
-export default Map;
-=======
 export default MapContainer;
->>>>>>> 10aeb7eda7f95c7c8ea5795b13ed3b7f492963d1
