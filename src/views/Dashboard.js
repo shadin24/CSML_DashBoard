@@ -1,13 +1,9 @@
-
 import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 import Reading from "./Reading";
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
-
-
-
 // reactstrap components
 import {
   Button,
@@ -28,8 +24,6 @@ import {
   Col,
   UncontrolledTooltip,
 } from "reactstrap";
-
-
 // core components
 import {
   chartExample1,
@@ -37,12 +31,12 @@ import {
   chartExample3,
   chartExample4,
 } from "variables/charts.js";
-
 function Dashboard(props) {
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
     setbigChartData(name);
   };
+  <Row className="justify-content-center align-items-center "></Row>
   return (
     <>
       <div className="content">
@@ -57,7 +51,6 @@ function Dashboard(props) {
              
              
              </CardBody>
-
          </Card>
          </Col>
          <Col lg="2" md="2" className="col">
@@ -70,7 +63,6 @@ function Dashboard(props) {
              <h3 className="title d-inline">10</h3>
              
              </CardBody>
-
          </Card>
          </Col>
          <Col lg="2" md="2" className="col">
@@ -83,7 +75,6 @@ function Dashboard(props) {
              <h3 className="title d-inline">10</h3>
              
              </CardBody>
-
          </Card>
          </Col>
          <Col lg="2" md="2" className="col">
@@ -94,7 +85,6 @@ function Dashboard(props) {
              <CardBody>
              <h3 className="title d-inline">10</h3>
              </CardBody>
-
          </Card>
          </Col>
          <Col lg="2" md="2" className="col">
@@ -105,7 +95,6 @@ function Dashboard(props) {
              <CardBody>
              <h3 className="title d-inline">10</h3>
              </CardBody>
-
          </Card>
          </Col>
         </Row>
@@ -318,9 +307,48 @@ function Dashboard(props) {
             </Card>
           </Col>
         </Row>
+
+        <Table>
+  <thead>
+    <tr style={{ color: 'white', fontSize: 20 }}>
+      <th style={{ borderBottom: '1px solid white', padding: '10px' }}>GASES</th>
+      <th style={{ borderBottom: '1px solid white', padding: '10px' }}>OPTIMUM VALUE</th>
+      <th style={{ borderBottom: '1px solid white', padding: '10px' }}>DANGEROUS VALUE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>SO2</td>
+      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>20 ppm</div></td>
+      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red' }}>100 ppm</div></td>
+    </tr>
+    <tr>
+      <td>NO2</td>
+      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>40 ppm</div></td>
+      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red' }}>200 ppm</div></td>
+    </tr>
+    <tr>
+      <td>PM2.5</td>
+      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>25 µg/m³</div></td>
+      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red' }}>100 µg/m³</div></td>
+    </tr>
+    <tr>
+      <td>PM10</td>
+      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>50 µg/m³</div></td>
+      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red' }}>250 µg/m³</div></td>
+    </tr>
+    <tr>
+      <td>CO</td>
+      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>10 ppm</div></td>
+      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red' }}>50 ppm</div></td>
+    </tr>
+  </tbody>
+
+
+</Table>
+
       </div>
     </>
   );
 }
-
 export default Dashboard;
