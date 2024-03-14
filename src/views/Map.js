@@ -10,7 +10,7 @@ const MapContainer = ({ apiKey }) => {
   const [selectedMarker, setSelectedMarker] = React.useState(null);
 
   return (
-    <div style={{ height: '300px', width: '100%' }}>
+    <div style={{ height: '100vh', width: '100%' }}> {/* Ensure full height */}
       <GoogleMap
         mapContainerStyle={{ height: '100%', width: '100%' }}
         zoom={14} // Adjust zoom level to focus on Kochi
@@ -43,8 +43,8 @@ const MapContainer = ({ apiKey }) => {
             onCloseClick={() => setSelectedMarker(null)}
           >
             <div>
-              <h3>{selectedMarker.title}</h3>
-              <p>Your Sensor is here</p>
+              <h3 style={{ color: 'black' }}>{selectedMarker.title}</h3>
+              <p style={{ color: 'black' }}>Your sensor is here !!!</p>
             </div>
           </InfoWindow>
         )}

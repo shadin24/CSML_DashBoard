@@ -27,32 +27,18 @@ function Footer() {
       <Container fluid>
         <Nav>
           <NavItem>
-            <NavLink href="https://www.creative-tim.com/?ref=bdr-user-archive-footer">
-              Creative Tim
+            <NavLink href="https://csml.co.in/?ref=bdr-user-archive-footer">
+             CSML
             </NavLink>
           </NavItem>
+         
           <NavItem>
-            <NavLink href="https://www.creative-tim.com/presentation?ref=bdr-user-archive-footer">
-              About Us
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink href="https://www.creative-tim.com/blog?ref=bdr-user-archive-footer">
+            <NavLink href="https://www.bing.com/ck/a?!&&p=f1ba4d723bb1ac4fJmltdHM9MTcxMDM3NDQwMCZpZ3VpZD0zMGZmN2ZhZS02ZDc1LTY1MjItMDhhYS02ZWFhNmNkODY0MzQmaW5zaWQ9NTIwOA&ptn=3&ver=2&hsh=3&fclid=30ff7fae-6d75-6522-08aa-6eaa6cd86434&psq=BLOGS+ABOUT+CSML&u=a1aHR0cHM6Ly9ibG9nLmNzbWwuZGV2Lw&ntb=1?ref=bdr-user-archive-footer">
               Blog
             </NavLink>
           </NavItem>
         </Nav>
-        <div className="copyright">
-          © {new Date().getFullYear()} made with{" "}
-          <i className="tim-icons icon-heart-2" /> by{" "}
-          <a
-            href="https://www.creative-tim.com/?ref=bdr-user-archive-footer"
-            target="_blank"
-          >
-            Creative Tim
-          </a>{" "}
-          for a better web.
-        </div>
+        
       </Container>
     </footer>
   );
