@@ -217,193 +217,86 @@ function Dashboard(props) {
           })}
         </Row>
 
-        <Table>
-          <thead>
-            <tr style={{ color: "white", fontSize: 20 }}>
-              <th style={{ borderBottom: "1px solid white", padding: "10px" }}>
-                GASES
-              </th>
-              <th style={{ borderBottom: "1px solid white", padding: "10px" }}>
-                OPTIMUM VALUE
-              </th>
-              <th style={{ borderBottom: "1px solid white", padding: "10px" }}>
-                DANGEROUS VALUE
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>NO2</td>
-              <td>
-                <FaCheckCircle style={{ color: "green" }} />
-                <div style={{ display: "inline-block", paddingLeft: "5px" }}>
-                  <div
-                    style={{
-                      border: "1px solid white",
-                      padding: "10px",
-                      borderRadius: "5px",
-                      backgroundColor: "green",
-                    }}
-                  >
-                    40 ppm
-                  </div>
-                </div>
-              </td>
-              <td>
-                <FaExclamationCircle style={{ color: "red" }} />
-                <div style={{ display: "inline-block", paddingLeft: "5px" }}>
-                  <div
-                    style={{
-                      border: "1px solid white",
-                      padding: "10px",
-                      borderRadius: "5px",
-                      backgroundColor: "red",
-                      color: "white",
-                    }}
-                  >
-                    200 ppm
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>SO2</td>
-              <td>
-                <FaCheckCircle style={{ color: "green" }} />
-                <div style={{ display: "inline-block", paddingLeft: "5px" }}>
-                  <div
-                    style={{
-                      border: "1px solid white",
-                      padding: "10px",
-                      borderRadius: "5px",
-                      backgroundColor: "green",
-                    }}
-                  >
-                    20 ppm
-                  </div>
-                </div>
-              </td>
-              <td>
-                <FaExclamationCircle style={{ color: "red" }} />
-                <div style={{ display: "inline-block", paddingLeft: "5px" }}>
-                  <div
-                    style={{
-                      border: "1px solid white",
-                      padding: "10px",
-                      borderRadius: "5px",
-                      backgroundColor: "red",
-                      color: "white",
-                    }}
-                  >
-                    100 ppm
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>PM2.5</td>
-              <td>
-                <FaCheckCircle style={{ color: "green" }} />
-                <div style={{ display: "inline-block", paddingLeft: "5px" }}>
-                  <div
-                    style={{
-                      border: "1px solid white",
-                      padding: "10px",
-                      borderRadius: "5px",
-                      backgroundColor: "green",
-                    }}
-                  >
-                    25 µg/m³
-                  </div>
-                </div>
-              </td>
-              <td>
-                <FaExclamationCircle style={{ color: "red" }} />
-                <div style={{ display: "inline-block", paddingLeft: "5px" }}>
-                  <div
-                    style={{
-                      border: "1px solid white",
-                      padding: "10px",
-                      borderRadius: "5px",
-                      backgroundColor: "red",
-                      color: "white",
-                    }}
-                  >
-                    100 µg/m³
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>PM10</td>
-              <td>
-                <FaCheckCircle style={{ color: "green" }} />
-                <div style={{ display: "inline-block", paddingLeft: "5px" }}>
-                  <div
-                    style={{
-                      border: "1px solid white",
-                      padding: "10px",
-                      borderRadius: "5px",
-                      backgroundColor: "green",
-                    }}
-                  >
-                    50 µg/m³
-                  </div>
-                </div>
-              </td>
-              <td>
-                <FaExclamationCircle style={{ color: "red" }} />
-                <div style={{ display: "inline-block", paddingLeft: "5px" }}>
-                  <div
-                    style={{
-                      border: "1px solid white",
-                      padding: "10px",
-                      borderRadius: "5px",
-                      backgroundColor: "red",
-                      color: "white",
-                    }}
-                  >
-                    250 µg/m³
-                  </div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>CO</td>
-              <td>
-                <FaCheckCircle style={{ color: "green" }} />
-                <div style={{ display: "inline-block", paddingLeft: "5px" }}>
-                  <div
-                    style={{
-                      border: "1px solid white",
-                      padding: "10px",
-                      borderRadius: "5px",
-                      backgroundColor: "green",
-                    }}
-                  >
-                    10 ppm
-                  </div>
-                </div>
-              </td>
-              <td>
-                <FaExclamationCircle style={{ color: "red" }} />
-                <div style={{ display: "inline-block", paddingLeft: "5px" }}>
-                  <div
-                    style={{
-                      border: "1px solid white",
-                      padding: "10px",
-                      borderRadius: "5px",
-                      backgroundColor: "red",
-                      color: "white",
-                    }}
-                  >
-                    50 ppm
-                  </div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </Table>
+         <div className="flex flex-col p-4 border rounded shadow-md m-5 justify-center items-center">
+      <div className="m-3 text-center">
+        <h3>
+          <b>Air Quality Index Scale</b>
+        </h3>
+        <p className="text-gray-500">
+          Know about the category of air quality index (AQI) your ambient air falls in and what it implies.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div  className="flex  p-2 border rounded shadow-md justify-center items-center divs">
+          <img
+            src="https://www.aqi.in/assets/images/cartton_shape_4.webp"
+            alt="Good air quality"
+            className="w-20 h-20"
+          />
+          <div className="text-green-500 font-bold m-3 ">Good (0-50)</div>
+          <p className="text-gray-500">
+            The air is fresh and free from toxins. People are not exposed to any health risk.
+          </p>
+        </div>
+        <div className="flex  p-2 border rounded shadow-md justify-center items-center divs">
+          <img
+            src="https://www.aqi.in/assets/images/cartton_shape_3.webp"
+            alt="Moderate air quality"
+            className="w-20 h-20"
+          />
+          <div className="text-yellow-500 font-bold m-3 whitespace-nowrap">Moderate (51-100)</div>
+          <p className="text-gray-500">
+            Acceptable air quality for healthy adults but might cause mild threat to sensitive individuals.
+          </p>
+        </div>
+        <div className="flex  p-2 border rounded shadow-md justify-center items-center divs">
+          <img
+            src="https://www.aqi.in/assets/images/cartton_shape_2.webp"
+            alt="Poor air quality"
+            className="w-20 h-20"
+          />
+          <div className="text-orange-500 font-bold m-3 ">Poor    (101-200)</div>
+          <p className="text-gray-500">
+            Inhaling such air can cause slight discomfort and difficulty in breathing. Unhealthy for children, pregnant women, and the elderly.
+          </p>
+        </div>
+        <div className="flex  p-2 border rounded shadow-md justify-center items-center divs">
+          <img
+            src="https://www.aqi.in/assets/images/cartton_shape_5.webp"
+            alt="Unhealthy air quality"
+            className="w-20 h-20"
+          />
+          <div className="text-red-500 font-bold m-3 ">Unhealthy (201-300)</div>
+          <p className="text-gray-500">
+            Exposure to air can cause chronic morbidities or even organ impairment. Prolonged exposure can lead to premature death.
+          </p>
+        </div>
+        <div className="flex  p-2 border rounded shadow-md justify-center items-center divs">
+          <img
+            src="https://www.aqi.in/assets/images/cartton_shape_5.webp"
+            alt="Unhealthy air quality"
+            className="w-20 h-20"
+          />
+          <div className="text-red-500 font-bold m-3 ">Unhealthy (201-300)</div>
+          <p className="text-gray-500">
+            Exposure to air can cause chronic morbidities or even organ impairment. Prolonged exposure can lead to premature death.
+          </p>
+        </div>
+        <div className="flex  p-2 border rounded shadow-md justify-center items-center divs">
+          <img
+            src="https://www.aqi.in/assets/images/cartton_shape_6.webp"
+            alt="Hazardous air quality"
+            className="w-20 h-20"
+          />
+          <div className="text-green-500 font-bold m-3 ">Hazardous (401-500)</div>
+          <p className="text-gray-500">
+            Hazardous air quality. Everyone is at risk.
+          </p>
+        </div>
+      </div>
+    </div>
+  
       </div>
     </>
   );

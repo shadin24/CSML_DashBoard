@@ -93,3 +93,86 @@
     border-radius: 20px;
 }
 
+/* existing-styles.css */
+
+/* Your existing styles */
+
+/* Add the styles for the AQI scale categories below */
+
+/* Specific styles for each AQI category */
+.text-green-500 {
+  color: #48bb78;
+}
+
+.text-yellow-500 {
+  color: #f6e05e;
+}
+
+.text-orange-500 {
+  color: #ed8936;
+}
+
+.text-red-500 {
+  color: #f56565;
+}
+
+.text-purple-500 {
+  color: #9f7aea;
+}
+
+/* AQI scale categories */
+.grid {
+  display: grid;
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gap-4 {
+  gap: 1rem;
+}
+
+/* Additional styles for specific AQI category containers */
+.divs{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+.divs img {
+
+  max-width: 10%;
+  border-radius: 0.2857rem;
+}
+
+
+
+
+.aqi-container img {
+  margin-right: 1rem;
+  width: 10px;
+  height: 10px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .grid-cols-2 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+
+
+/* Custom CSS */
+
+/* Ensure each container is displayed in a single row */
+
+
+/* Adjust spacing between items */
+
+
+
+
+
