@@ -81,76 +81,21 @@ function Tables() {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Kalamassery</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                    
-                    </tr>
-                    <tr>
-                      <td>Kalamassery</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      
-                    </tr>
-                    <tr>
-                      <td>Kalamassery</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      
-                    </tr>
-                    <tr>
-                      <td>Kalamassery</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      
-                    </tr>
-                    <tr>
-                      <td>Kalamassery</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      
-                    </tr>
-                    <tr>
-                      <td>Kalamassery</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                     
-                    </tr>
-                    <tr>
-                      <td>Kalamassery</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      
-                    </tr>
+                    {pastFiveDaysData.map((data) => (
+                      data.date === selectedDate && (
+                        data.sensors.map((sensor, index) => (
+                          <tr key={index}>
+                            <td>{sensor.location}</td>
+                            <td>{sensor.AQI}</td>
+                            <td>{sensor.SO2}</td>
+                            <td>{sensor.NO2}</td>
+                            <td>{sensor.CO}</td>
+                            <td>{sensor.PM10}</td>
+                            <td>{sensor.PM25}</td>
+                          </tr>
+                        ))
+                      )
+                    ))}
                   </tbody>
                 </Table>
               </CardBody>
