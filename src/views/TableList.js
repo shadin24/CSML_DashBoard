@@ -63,7 +63,7 @@ function Tables() {
                     
                     </tr>
                     <tr>
-                      <td>Kalamassery</td>
+                      <td>CUSAT</td>
                       <td>10</td>
                       <td>10</td>
                       <td >10</td>
@@ -73,7 +73,7 @@ function Tables() {
                       
                     </tr>
                     <tr>
-                      <td>Kalamassery</td>
+                      <td>Edappally</td>
                       <td>10</td>
                       <td>10</td>
                       <td >10</td>
@@ -120,7 +120,6 @@ function Tables() {
                       <td>10</td>
                       <td>10</td>
                       <td >10</td>
-                      
                     </tr>
                   </tbody>
                 </Table>
