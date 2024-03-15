@@ -4,6 +4,7 @@ import classNames from "classnames";
 import Reading from "./Reading";
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
+import { FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
 // reactstrap components
 import {
   Button,
@@ -214,138 +215,93 @@ function Dashboard(props) {
         </Row>
         
         
-        <Row>
-          <Col lg="6" md="12">
-            <Card className="card-tasks">
-              <CardHeader>
-                <h3 className="title d-inline">10</h3>
-                <p className="card-category d-inline"> Current</p>
-              </CardHeader>
-              <CardBody>
-              
-              
-              </CardBody>
-            </Card>
-          </Col>
-          <Col lg="6" md="12">
-            <Card>
-              <CardHeader>
-                <CardTitle tag="h4">Current Values</CardTitle>
-              </CardHeader>
-              <CardBody>
-                <Table className="tablesorter" responsive>
-                  <thead className="text-primary">
-                    <tr>
-                      <th>Sensor ID</th>
-                      <th>pH</th>
-                      <th>Temp</th>
-                      <th>TDS</th>
-                      <th>Turb</th>
-                      <th>DO</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>S001</td>
-                      <td>7.01</td>
-                      <td>25.00</td>
-                      <td>0.50</td>
-                      <td>1.25</td>
-                      <td>9.50</td>
-                    </tr>
-                    <tr>
-                      <td>S001</td>
-                      <td>7.01</td>
-                      <td>25.00</td>
-                      <td>0.50</td>
-                      <td>1.25</td>
-                      <td>9.50</td>
-                    </tr>
-                    <tr>
-                      <td>S001</td>
-                      <td>7.01</td>
-                      <td>25.00</td>
-                      <td>0.50</td>
-                      <td>1.25</td>
-                      <td>9.50</td>
-                    </tr>
-                    <tr>
-                      <td>S001</td>
-                      <td>7.01</td>
-                      <td>25.00</td>
-                      <td>0.50</td>
-                      <td>1.25</td>
-                      <td>9.50</td>
-                    </tr>
-                    <tr>
-                      <td>S001</td>
-                      <td>7.01</td>
-                      <td>25.00</td>
-                      <td>0.50</td>
-                      <td>1.25</td>
-                      <td>9.50</td>
-                    </tr>
-                    <tr>
-                      <td>S001</td>
-                      <td>7.01</td>
-                      <td>25.00</td>
-                      <td>0.50</td>
-                      <td>1.25</td>
-                      <td>9.50</td>
-                    </tr>
-                    <tr>
-                      <td>S001</td>
-                      <td>7.01</td>
-                      <td>25.00</td>
-                      <td>0.50</td>
-                      <td>1.25</td>
-                      <td>9.50</td>
-                    </tr>
-                  </tbody>
-                </Table>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-
         <Table>
-  <thead>
-    <tr style={{ color: 'white', fontSize: 20 }}>
-      <th style={{ borderBottom: '1px solid white', padding: '10px' }}>GASES</th>
-      <th style={{ borderBottom: '1px solid white', padding: '10px' }}>OPTIMUM VALUE</th>
-      <th style={{ borderBottom: '1px solid white', padding: '10px' }}>DANGEROUS VALUE</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>SO2</td>
-      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>20 ppm</div></td>
-      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red' }}>100 ppm</div></td>
-    </tr>
-    <tr>
-      <td>NO2</td>
-      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>40 ppm</div></td>
-      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red' }}>200 ppm</div></td>
-    </tr>
-    <tr>
-      <td>PM2.5</td>
-      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>25 µg/m³</div></td>
-      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red' }}>100 µg/m³</div></td>
-    </tr>
-    <tr>
-      <td>PM10</td>
-      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>50 µg/m³</div></td>
-      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red' }}>250 µg/m³</div></td>
-    </tr>
-    <tr>
-      <td>CO</td>
-      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>10 ppm</div></td>
-      <td><div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red' }}>50 ppm</div></td>
-    </tr>
-  </tbody>
+          <thead>
+            <tr style={{ color: 'white', fontSize: 20 }}>
+              <th style={{ borderBottom: '1px solid white', padding: '10px' }}>GASES</th>
+              <th style={{ borderBottom: '1px solid white', padding: '10px' }}>OPTIMUM VALUE</th>
+              <th style={{ borderBottom: '1px solid white', padding: '10px' }}>DANGEROUS VALUE</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>NO2</td>
+              <td>
+                <FaCheckCircle style={{ color: 'green' }} />
+                <div style={{ display: 'inline-block', paddingLeft: '5px' }}>
+                  <div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>40 ppm</div>
+                </div>
+              </td>
+              <td>
+                <FaExclamationCircle style={{ color: 'red' }} />
+                <div style={{ display: 'inline-block', paddingLeft: '5px' }}>
+                  <div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red', color: 'white' }}>200 ppm</div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>SO2</td>
+              <td>
+                <FaCheckCircle style={{ color: 'green' }} />
+                <div style={{ display: 'inline-block', paddingLeft: '5px' }}>
+                  <div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>20 ppm</div>
+                </div>
+              </td>
+              <td>
+                <FaExclamationCircle style={{ color: 'red' }} />
+                <div style={{ display: 'inline-block', paddingLeft: '5px' }}>
+                  <div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red', color: 'white' }}>100 ppm</div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>PM2.5</td>
+              <td>
+                <FaCheckCircle style={{ color: 'green' }} />
+                <div style={{ display: 'inline-block', paddingLeft: '5px' }}>
+                  <div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>25 µg/m³</div>
+                </div>
+              </td>
+              <td>
+                <FaExclamationCircle style={{ color: 'red' }} />
+                <div style={{ display: 'inline-block', paddingLeft: '5px' }}>
+                  <div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red', color: 'white' }}>100 µg/m³</div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>PM10</td>
+              <td>
+                <FaCheckCircle style={{ color: 'green' }} />
+                <div style={{ display: 'inline-block', paddingLeft: '5px' }}>
+                  <div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>50 µg/m³</div>
+                </div>
+              </td>
+              <td>
+                <FaExclamationCircle style={{ color: 'red' }} />
+                <div style={{ display: 'inline-block', paddingLeft: '5px' }}>
+                  <div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red', color: 'white' }}>250 µg/m³</div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>CO</td>
+              <td>
+                <FaCheckCircle style={{ color: 'green' }} />
+                <div style={{ display: 'inline-block', paddingLeft: '5px' }}>
+                  <div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>10 ppm</div>
+                </div>
+              </td>
+              <td>
+                <FaExclamationCircle style={{ color: 'red' }} />
+                <div style={{ display: 'inline-block', paddingLeft: '5px' }}>
+                  <div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red', color: 'white' }}>50 ppm</div>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </Table>
 
-
-</Table>
 
       </div>
     </>

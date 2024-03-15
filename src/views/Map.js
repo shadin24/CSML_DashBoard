@@ -1,80 +1,111 @@
-import React from 'react';
-import { GoogleMap, Marker, InfoWindow } from '@react-google-maps/api';
+import React from "react";
+import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
 
-const MapContainer = ({ apiKey }) => {
-  const kochiCoords = { lat: 9.9312, lng: 76.2673 }; // Coordinates for Kochi
-  const kalamasseryCoords = { lat: 10.0482, lng: 76.3224 }; // Coordinates for Kalamassery
-  const edapallyCoords = { lat: 10.0339, lng: 76.3074 }; // Coordinates for Edapally
-  const kaloorCoords = { lat: 9.9997, lng: 76.3060 }; // Coordinates for Kaloor
+const MapWrapper = ({ sensorData }) => {
+  const mapRef = React.useRef(null);
 
-  const [selectedMarker, setSelectedMarker] = React.useState(null);
+  React.useEffect(() => {
+    let google = window.google;
+    let map = mapRef.current;
 
-  return (
-    <div style={{ height: '300px', width: '100%' }}>
-      <GoogleMap
-        mapContainerStyle={{ height: '100%', width: '100%' }}
-        zoom={14} // Adjust zoom level to focus on Kochi
-        center={kochiCoords} // Set center to Kochi's coordinates
-      >
-        {/* Marker for Kochi */}
-        <Marker
-          position={kochiCoords}
-          onClick={() => setSelectedMarker({ title: "Kochi", coords: kochiCoords })}
-        />
-        {/* Marker for Kalamassery */}
-        <Marker
-          position={kalamasseryCoords}
-          onClick={() => setSelectedMarker({ title: "Kalamassery", coords: kalamasseryCoords })}
-        />
-        {/* Marker for Edapally */}
-        <Marker
-          position={edapallyCoords}
-          onClick={() => setSelectedMarker({ title: "Edapally", coords: edapallyCoords })}
-        />
-        {/* Marker for Kaloor */}
-        <Marker
-          position={kaloorCoords}
-          onClick={() => setSelectedMarker({ title: "Kaloor", coords: kaloorCoords })}
-        />
-        {/* Info window for selected marker */}
-        {selectedMarker && (
-          <InfoWindow
-            position={selectedMarker.coords}
-            onCloseClick={() => setSelectedMarker(null)}
-          >
-            <div>
-              <h3>{selectedMarker.title}</h3>
-              <p>Your Sensor is here</p>
-            </div>
-          </InfoWindow>
-        )}
-      </GoogleMap>
-    </div>
-  );
+    const kalamasseryCoords = { lat: 10.0395, lng: 76.3152 };
+
+    const mapOptions = {
+      center: kalamasseryCoords,
+      zoom: 12,
+      scrollwheel: false,
+      styles: [] // You can add custom styles here if needed
+    };
+
+    map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+    // Loop through sensorData array and add markers for each location
+    sensorData.forEach(data => {
+      const sensorMarker = new google.maps.Marker({
+        position: data.location,
+        map: map,
+        animation: google.maps.Animation.DROP,
+        title: "Sensor Location: " + data.name
+      });
+
+      const contentString = `
+        <div style="color: black;">
+          <h5>${data.name}</h5>
+          <p>CO: ${data.CO}</p>
+          <p>SO2: ${data.SO2}</p>
+          <p>PM2.5: ${data.PM25}</p>
+          <p>PM10: ${data.PM10}</p>
+          <p>NH3: ${data.NH3}</p>
+        </div>
+      `;
+
+      const infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+
+      google.maps.event.addListener(sensorMarker, "click", function () {
+        infowindow.open(map, sensorMarker);
+      });
+    });
+  }, [sensorData]);
+
+  return <div ref={mapRef} id="map" style={{ height: "400px" }} />;
 };
 
-export default MapContainer;
-const Map = () => {
+function Map() {
+  // Define sensor data
+  const sensorData = [
+    {
+      name: "Kalamassery",
+      location: { lat: 10.0395, lng: 76.3152 },
+      CO: 0.5,
+      SO2: 2.1,
+      PM25: 10,
+      PM10: 20,
+      NH3: 0.8
+    },
+    {
+      name: "Edapally",
+      location: { lat: 10.0331, lng: 76.3075 },
+      CO: 0.7,
+      SO2: 2.5,
+      PM25: 12,
+      PM10: 22,
+      NH3: 0.9
+    },
+    {
+      name: "Kaloor",
+      location: { lat: 9.9888, lng: 76.2925 },
+      CO: 0.6,
+      SO2: 2.3,
+      PM25: 11,
+      PM10: 21,
+      NH3: 0.85
+    }
+  ];
+
   return (
-    <div className="content">
-      <Row>
-        <Col md="12">
-          <Card className="card-plain">
-            <CardHeader>Google Maps</CardHeader>
-            <CardBody>
-              <div
-                id="map"
-                className="map"
-                style={{ position: "relative", overflow: "hidden" }}
-              >
-                <MapContainer />
-              </div>
-            </CardBody>
-          </Card>
-        </Col>
-      </Row>
-    </div>
+    <>
+      <div className="content">
+        <Row>
+          <Col md="12">
+            <Card className="card-plain">
+              <CardHeader>Google Maps</CardHeader>
+              <CardBody>
+                <div
+                  id="map"
+                  className="map"
+                  style={{ position: "relative", overflow: "hidden" }}
+                >
+                  <MapWrapper sensorData={sensorData} />
+                </div>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+      </div>
+    </>
   );
-};
+}
 
 export default Map;
