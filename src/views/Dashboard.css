@@ -1,0 +1,72 @@
+.rounded-box {
+    background: red;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+.inner-round-1 {
+    padding: 10px;
+    background: white;
+    height: 90px;
+    width: 90px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+.inner-round-2 {
+    padding: 10px;
+    background: #ad1b1b;
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+.rounted-card-container {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    gap: 30px;
+    margin: 10px auto;
+}
+
+.card-chartcard-chart-condition {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+
+}
+
+.condition {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+
+}
+
+.condition p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ea0541;
+    height: 30px;
+    width: 100%;
+    border-radius: 20px;
+}
+
