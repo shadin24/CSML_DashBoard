@@ -47,6 +47,7 @@
     "reactstrap": "8.10.1"
   },
   "devDependencies": {
+    "tailwindcss": "^3.4.1",
     "typescript": "5.0.4"
   },
   "overrides": {
