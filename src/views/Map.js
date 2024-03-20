@@ -1,55 +1,90 @@
 import React from "react";
 import { Card, CardHeader, CardBody, Row, Col } from "reactstrap";
 
-// Modified MapWrapper component
-const MapWrapper = () => {
+const MapWrapper = ({ sensorData }) => {
   const mapRef = React.useRef(null);
 
   React.useEffect(() => {
     let google = window.google;
     let map = mapRef.current;
 
-    // Coordinates of Kalamassery
-    let kalamasseryCoords = { lat: 10.0395, lng: 76.3152 };
+    const kalamasseryCoords = { lat: 10.0395, lng: 76.3152 };
 
-    // Create a new map centered on Kalamassery
     const mapOptions = {
       center: kalamasseryCoords,
       zoom: 12,
       scrollwheel: false,
-      styles: [
-        // Google Map styles
-      ],
+      styles: [] // You can add custom styles here if needed
     };
 
     map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-    // Hardcoded coordinates for the sensor location
-    const sensorCoords = { lat: 10.0428, lng: 76.3317 }; // Example coordinates, replace with actual sensor location
+    // Loop through sensorData array and add markers for each location
+    sensorData.forEach(data => {
+      const sensorMarker = new google.maps.Marker({
+        position: data.location,
+        map: map,
+        animation: google.maps.Animation.DROP,
+        title: "Sensor Location: " + data.name
+      });
 
-    const sensorMarker = new google.maps.Marker({
-      position: sensorCoords,
-      map: map,
-      animation: google.maps.Animation.DROP,
-      title: "YOU ARE HERE!!!",
+      const contentString = `
+      <div style="color: red;">
+      <h5>${data.name}</h5>
+      <p>CO: ${data.CO}</p>
+      <p>SO2: ${data.SO2}</p>
+      <p>PM2.5: ${data.PM25}</p>
+      <p>PM10: ${data.PM10}</p>
+      <p>NH3: ${data.NH3}</p>
+    </div>
+    
+      `;
+
+      const infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+
+      google.maps.event.addListener(sensorMarker, "click", function () {
+        infowindow.open(map, sensorMarker);
+      });
     });
-
-    const contentString = "Sensor Location";
-
-    const infowindow = new google.maps.InfoWindow({
-      content: contentString,
-    });
-
-    // Show info window when marker is clicked
-    google.maps.event.addListener(sensorMarker, "click", function () {
-      infowindow.open(map, sensorMarker);
-    });
-  }, []);
+  }, [sensorData]);
 
   return <div ref={mapRef} id="map" style={{ height: "400px" }} />;
 };
 
 function Map() {
+  // Define sensor data
+  const sensorData = [
+    {
+      name: "Kalamassery",
+      location: { lat: 10.0395, lng: 76.3152 },
+      CO: 0.5,
+      SO2: 2.1,
+      PM25: 10,
+      PM10: 20,
+      NH3: 0.8
+    },
+    {
+      name: "Edapally",
+      location: { lat: 10.0331, lng: 76.3075 },
+      CO: 0.7,
+      SO2: 2.5,
+      PM25: 12,
+      PM10: 22,
+      NH3: 0.9
+    },
+    {
+      name: "Kaloor",
+      location: { lat: 9.9888, lng: 76.2925 },
+      CO: 0.6,
+      SO2: 2.3,
+      PM25: 11,
+      PM10: 21,
+      NH3: 0.85
+    }
+  ];
+
   return (
     <>
       <div className="content">
@@ -63,7 +98,7 @@ function Map() {
                   className="map"
                   style={{ position: "relative", overflow: "hidden" }}
                 >
-                  <MapWrapper />
+                  <MapWrapper sensorData={sensorData} />
                 </div>
               </CardBody>
             </Card>
@@ -75,4 +110,3 @@ function Map() {
 }
 
 export default Map;
-
