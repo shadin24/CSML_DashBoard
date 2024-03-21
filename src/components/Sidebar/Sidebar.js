@@ -53,7 +53,7 @@ function Sidebar(props) {
           onClick={props.toggleSidebar}
         >
           <div className="logo-img">
-            <img src={logo.imgSrc} alt="react-logo" />
+            <img src="https://bworld.digital/wp-content/uploads/2021/06/CSML-LOGO-web.png" alt="react-logo" />
           </div>
         </a>
       );

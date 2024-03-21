@@ -114,8 +114,8 @@ function UserProfile() {
                       <FormGroup>
                         <label>City</label>
                         <Input
-                          defaultValue="Mike"
-                          placeholder="City"
+                          defaultValue="Kochi"
+                          placeholder=""
                           type="text"
                         />
                       </FormGroup>
@@ -143,8 +143,7 @@ function UserProfile() {
                         <label>About Me</label>
                         <Input
                           cols="80"
-                          defaultValue="Lamborghini Mercy, Your chick she so thirsty, I'm in
-                            that two seat Lambo."
+                          defaultValue="Air Quality Monitoring System"
                           placeholder="Here can be your description"
                           rows="4"
                           type="textarea"
