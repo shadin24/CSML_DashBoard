@@ -56,11 +56,11 @@ function Dashboard(props) {
                     type="range"
                     min="1"
                     max="100"
-                    value="50"
+                    value="25"
                     className="slider"
                     id="myRange"
                   />
-                  <h3>AWI</h3>
+                  <h3>AQI</h3>
                   <p>Good</p>
                 </div>
               </CardBody>
