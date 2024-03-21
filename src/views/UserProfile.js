@@ -60,7 +60,7 @@ function UserProfile() {
                       <FormGroup>
                         <label>Username</label>
                         <Input
-                          defaultValue="michael23"
+                          defaultValue="Srishant123"
                           placeholder="Username"
                           type="text"
                         />
@@ -71,7 +71,7 @@ function UserProfile() {
                         <label htmlFor="exampleInputEmail1">
                           Email address
                         </label>
-                        <Input placeholder="mike@email.com" type="email" />
+                        <Input placeholder="Srishant@email.com" type="email" />
                       </FormGroup>
                     </Col>
                   </Row>
@@ -80,7 +80,7 @@ function UserProfile() {
                       <FormGroup>
                         <label>First Name</label>
                         <Input
-                          defaultValue="Mike"
+                          defaultValue="srishan"
                           placeholder="Company"
                           type="text"
                         />
@@ -90,7 +90,7 @@ function UserProfile() {
                       <FormGroup>
                         <label>Last Name</label>
                         <Input
-                          defaultValue="Andrew"
+                          defaultValue="Jayan"
                           placeholder="Last Name"
                           type="text"
                         />
@@ -124,7 +124,7 @@ function UserProfile() {
                       <FormGroup>
                         <label>Country</label>
                         <Input
-                          defaultValue="Andrew"
+                          defaultValue="India"
                           placeholder="Country"
                           type="text"
                         />
