@@ -1,0 +1,95 @@
+.rounded-box {
+    height: 130px;
+    width: 130px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    margin: 40px;
+    margin-left: 75px;
+  }
+  
+  .inner-round-1 {
+    padding: 10px;
+    background: white;
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+  }
+  
+  .inner-round-2 {
+    padding: 10px;
+    background: #74f095;
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+  }
+  
+  /* Additional colors */
+  .bg-blue-500 {
+    background-color: #2196F3;
+  }
+  
+  .bg-green-500 {
+    background-color: #4CAF50;
+  }
+  
+  .bg-yellow-500 {
+    background-color: #FFEB3B;
+  }
+  
+  .bg-red-500 {
+    background-color: #F44336;
+  }
+  
+  .bg-purple-500 {
+    background-color: #9C27B0;
+  }
+  
+
+.rounted-card-container {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    gap: 30px;
+    margin: 10px auto;
+}
+
+.card-chartcard-chart-condition {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+
+}
+
+.condition {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+
+}
+
+.condition p{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #ea0541;
+    height: 30px;
+    width: 100%;
+    border-radius: 20px;
+}
+

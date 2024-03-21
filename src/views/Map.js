@@ -29,14 +29,15 @@ const MapWrapper = ({ sensorData }) => {
       });
 
       const contentString = `
-        <div style="color: black;">
-          <h5>${data.name}</h5>
-          <p>CO: ${data.CO}</p>
-          <p>SO2: ${data.SO2}</p>
-          <p>PM2.5: ${data.PM25}</p>
-          <p>PM10: ${data.PM10}</p>
-          <p>NH3: ${data.NH3}</p>
-        </div>
+      <div style="color: red;">
+      <h5>${data.name}</h5>
+      <p>CO: ${data.CO}</p>
+      <p>SO2: ${data.SO2}</p>
+      <p>PM2.5: ${data.PM25}</p>
+      <p>PM10: ${data.PM10}</p>
+      <p>NH3: ${data.NH3}</p>
+    </div>
+    
       `;
 
       const infowindow = new google.maps.InfoWindow({

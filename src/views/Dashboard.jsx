@@ -2,8 +2,6 @@ import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 import Reading from "./Reading";
-import Round_progress from "./Round_progress";
-
 // react plugin used to create charts
 import { Line, Bar } from "react-chartjs-2";
 import { FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
@@ -39,35 +37,69 @@ function Dashboard(props) {
   const setBgChartData = (name) => {
     setbigChartData(name);
   };
-
+  <Row className="justify-content-center align-items-center "></Row>
   return (
     <>
       <div className="content">
- <Row><Round_progress
-          colour="bg-green-400"
-          border="border-green-400"
-          value="01"
-        />
-        <Round_progress
-          colour="bg-blue-400"
-          border="border-blue-400"
-          value="02"
-        />
-        <Round_progress
-          colour="bg-yellow-400"
-          border="border-yellow-400"
-          value="03"
-        />
-        <Round_progress
-          colour="bg-red-400"
-          border="border-red-400"
-          value="08"
-        />
-        <Round_progress
-          colour="bg-purple-400"
-          border="border-purple-400"
-          value="09"
-        />
+        <Row>
+        <Col lg="2" md="2" className="col">
+        <Card >
+             <CardHeader>
+               <p className="card-category d-inline"> PM 2.5</p>
+             </CardHeader>
+             <CardBody>
+             <h3 className="title d-inline">10</h3>
+             
+             
+             </CardBody>
+         </Card>
+         </Col>
+         <Col lg="2" md="2" className="col">
+        <Card >
+             <CardHeader>
+               
+               <p className="card-category d-inline"> PM 10</p>
+             </CardHeader>
+             <CardBody>
+             <h3 className="title d-inline">10</h3>
+             
+             </CardBody>
+         </Card>
+         </Col>
+         <Col lg="2" md="2" className="col">
+        <Card >
+             <CardHeader>
+               
+               <p className="card-category d-inline"> CO</p>
+             </CardHeader>
+             <CardBody>
+             <h3 className="title d-inline">10</h3>
+             
+             </CardBody>
+         </Card>
+         </Col>
+         <Col lg="2" md="2" className="col">
+        <Card >
+             <CardHeader>
+               <p className="card-category d-inline"> NO2</p>
+             </CardHeader>
+             <CardBody>
+             <h3 className="title d-inline">10</h3>
+             </CardBody>
+         </Card>
+         </Col>
+         <Col lg="2" md="2" className="col">
+        <Card >
+             <CardHeader>  
+               <p className="card-category d-inline"> SO2</p>
+             </CardHeader>
+             <CardBody>
+             <h3 className="title d-inline">10</h3>
+             </CardBody>
+         </Card>
+         </Col>
+        </Row>
+        <Row>
           <Col xs="12">
             <Card className="card-chart">
               <CardHeader>
