@@ -1,106 +1,73 @@
 import React from "react";
 // nodejs library that concatenates classes
 import classNames from "classnames";
-import Reading from "./Reading";
 // react plugin used to create charts
-import { Line, Bar } from "react-chartjs-2";
-import { FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
+import { Line } from "react-chartjs-2";
+import { FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
 // reactstrap components
 import {
   Button,
   ButtonGroup,
   Card,
-  CardHeader,
   CardBody,
+  CardHeader,
   CardTitle,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  Label,
-  FormGroup,
-  Input,
-  Table,
-  Row,
   Col,
-  UncontrolledTooltip,
+  Row,
+  Table,
 } from "reactstrap";
 // core components
-import {
-  chartExample1,
-  chartExample2,
-  chartExample3,
-  chartExample4,
-} from "variables/charts.js";
+import { chartExample1 } from "variables/charts.js";
+
+import "./Dashboard.css";
+
 function Dashboard(props) {
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
     setbigChartData(name);
   };
-  <Row className="justify-content-center align-items-center "></Row>
   return (
     <>
       <div className="content">
+        
+
         <Row>
-        <Col lg="2" md="2" className="col">
-        <Card >
-             <CardHeader>
-               <p className="card-category d-inline"> PM 2.5</p>
-             </CardHeader>
-             <CardBody>
-             <h3 className="title d-inline">10</h3>
-             
-             
-             </CardBody>
-         </Card>
-         </Col>
-         <Col lg="2" md="2" className="col">
-        <Card >
-             <CardHeader>
-               
-               <p className="card-category d-inline"> PM 10</p>
-             </CardHeader>
-             <CardBody>
-             <h3 className="title d-inline">10</h3>
-             
-             </CardBody>
-         </Card>
-         </Col>
-         <Col lg="2" md="2" className="col">
-        <Card >
-             <CardHeader>
-               
-               <p className="card-category d-inline"> CO</p>
-             </CardHeader>
-             <CardBody>
-             <h3 className="title d-inline">10</h3>
-             
-             </CardBody>
-         </Card>
-         </Col>
-         <Col lg="2" md="2" className="col">
-        <Card >
-             <CardHeader>
-               <p className="card-category d-inline"> NO2</p>
-             </CardHeader>
-             <CardBody>
-             <h3 className="title d-inline">10</h3>
-             </CardBody>
-         </Card>
-         </Col>
-         <Col lg="2" md="2" className="col">
-        <Card >
-             <CardHeader>  
-               <p className="card-category d-inline"> SO2</p>
-             </CardHeader>
-             <CardBody>
-             <h3 className="title d-inline">10</h3>
-             </CardBody>
-         </Card>
-         </Col>
-        </Row>
-        <Row>
-          <Col xs="12">
+          <Col xs={4}>
+            <Card className="card-chart card-chart-condition">
+              <CardHeader>
+                <CardTitle
+                  tag="h1"
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    fontSize: "5rem",
+                    fontWeight: "1000",
+                  }}
+                >
+                  25
+                </CardTitle>
+              </CardHeader>
+              <CardBody>
+                <div
+                  className="chart-area condition"
+                  style={{ height: "190px" }}
+                >
+                  <input
+                    type="range"
+                    min="1"
+                    max="100"
+                    value="25"
+                    className="slider"
+                    id="myRange"
+                  />
+                  <h3>AQI</h3>
+                  <p>Good</p>
+                </div>
+              </CardBody>
+            </Card>
+          </Col>
+
+          <Col xs={8}>
             <Card className="card-chart">
               <CardHeader>
                 <Row>
@@ -122,8 +89,16 @@ function Dashboard(props) {
                         id="0"
                         size="sm"
                         onClick={() => setBgChartData("data1")}
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                        }}
                       >
-                        <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                        <span
+                          className=" d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                          style={{ width: "50px" }}
+                        >
                           PM 2.5
                         </span>
                         <span className="d-block d-sm-none">
@@ -213,98 +188,118 @@ function Dashboard(props) {
             </Card>
           </Col>
         </Row>
-        
-        
-        <Table>
-          <thead>
-            <tr style={{ color: 'white', fontSize: 20 }}>
-              <th style={{ borderBottom: '1px solid white', padding: '10px' }}>GASES</th>
-              <th style={{ borderBottom: '1px solid white', padding: '10px' }}>OPTIMUM VALUE</th>
-              <th style={{ borderBottom: '1px solid white', padding: '10px' }}>DANGEROUS VALUE</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>NO2</td>
-              <td>
-                <FaCheckCircle style={{ color: 'green' }} />
-                <div style={{ display: 'inline-block', paddingLeft: '5px' }}>
-                  <div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>40 ppm</div>
-                </div>
-              </td>
-              <td>
-                <FaExclamationCircle style={{ color: 'red' }} />
-                <div style={{ display: 'inline-block', paddingLeft: '5px' }}>
-                  <div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red', color: 'white' }}>200 ppm</div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>SO2</td>
-              <td>
-                <FaCheckCircle style={{ color: 'green' }} />
-                <div style={{ display: 'inline-block', paddingLeft: '5px' }}>
-                  <div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>20 ppm</div>
-                </div>
-              </td>
-              <td>
-                <FaExclamationCircle style={{ color: 'red' }} />
-                <div style={{ display: 'inline-block', paddingLeft: '5px' }}>
-                  <div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red', color: 'white' }}>100 ppm</div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>PM2.5</td>
-              <td>
-                <FaCheckCircle style={{ color: 'green' }} />
-                <div style={{ display: 'inline-block', paddingLeft: '5px' }}>
-                  <div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>25 µg/m³</div>
-                </div>
-              </td>
-              <td>
-                <FaExclamationCircle style={{ color: 'red' }} />
-                <div style={{ display: 'inline-block', paddingLeft: '5px' }}>
-                  <div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red', color: 'white' }}>100 µg/m³</div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>PM10</td>
-              <td>
-                <FaCheckCircle style={{ color: 'green' }} />
-                <div style={{ display: 'inline-block', paddingLeft: '5px' }}>
-                  <div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>50 µg/m³</div>
-                </div>
-              </td>
-              <td>
-                <FaExclamationCircle style={{ color: 'red' }} />
-                <div style={{ display: 'inline-block', paddingLeft: '5px' }}>
-                  <div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red', color: 'white' }}>250 µg/m³</div>
-                </div>
-              </td>
-            </tr>
-            <tr>
-              <td>CO</td>
-              <td>
-                <FaCheckCircle style={{ color: 'green' }} />
-                <div style={{ display: 'inline-block', paddingLeft: '5px' }}>
-                  <div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'green' }}>10 ppm</div>
-                </div>
-              </td>
-              <td>
-                <FaExclamationCircle style={{ color: 'red' }} />
-                <div style={{ display: 'inline-block', paddingLeft: '5px' }}>
-                  <div style={{ border: '1px solid white', padding: '10px', borderRadius: '5px', backgroundColor: 'red', color: 'white' }}>50 ppm</div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </Table>
 
+        <Row className={"rounded-card-container"}>
+          {["PM2.5", "PM10", "CO", "NO2", "SO2"].map((pollutant, index) => {
+            // Define an array of colors
+            const colors = [
+              "bg-blue-500",
+              "bg-green-500",
+              "bg-yellow-500",
+              "bg-red-500",
+              "bg-purple-500",
+            ];
 
+            // Assign color based on index
+            const colorClass = colors[index];
+
+            return (
+              <div key={index} className={`rounded-box ${colorClass}`}>
+                <div className="inner-round-1">
+                  <div key={index} className={`inner-round-2 ${colorClass}`}>
+                    <span style={{ color: "white", fontWeight: "bold" }}>
+                      {pollutant}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </Row>
+
+         <div className="flex flex-col p-4 border rounded shadow-md m-5 justify-center items-center">
+      <div className="m-3 text-center">
+        <h3>
+          <b>Air Quality Index Scale</b>
+        </h3>
+        <p className="text-gray-500">
+          Know about the category of air quality index (AQI) your ambient air falls in and what it implies.
+        </p>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div  className="flex  p-2 border rounded shadow-md justify-center items-center divs">
+          <img
+            src="https://www.aqi.in/assets/images/cartton_shape_4.webp"
+            alt="Good air quality"
+            className="w-20 h-20"
+          />
+          <div className="text-green-500 font-bold m-3 ">Good (0-50)</div>
+          <p className="text-gray-500">
+            The air is fresh and free from toxins. People are not exposed to any health risk.
+          </p>
+        </div>
+        <div className="flex  p-2 border rounded shadow-md justify-center items-center divs">
+          <img
+            src="https://www.aqi.in/assets/images/cartton_shape_3.webp"
+            alt="Moderate air quality"
+            className="w-20 h-20"
+          />
+          <div className="text-yellow-500 font-bold m-3 whitespace-nowrap">Moderate (51-100)</div>
+          <p className="text-gray-500">
+            Acceptable air quality for healthy adults but might cause mild threat to sensitive individuals.
+          </p>
+        </div>
+        <div className="flex  p-2 border rounded shadow-md justify-center items-center divs">
+          <img
+            src="https://www.aqi.in/assets/images/cartton_shape_2.webp"
+            alt="Poor air quality"
+            className="w-20 h-20"
+          />
+          <div className="text-orange-500 font-bold m-3 ">Poor    (101-200)</div>
+          <p className="text-gray-500">
+            Inhaling such air can cause slight discomfort and difficulty in breathing. Unhealthy for children, pregnant women, and the elderly.
+          </p>
+        </div>
+        <div className="flex  p-2 border rounded shadow-md justify-center items-center divs">
+          <img
+            src="https://www.aqi.in/assets/images/cartton_shape_5.webp"
+            alt="Unhealthy air quality"
+            className="w-20 h-20"
+          />
+          <div className="text-red-500 font-bold m-3 ">Unhealthy (201-300)</div>
+          <p className="text-gray-500">
+            Exposure to air can cause chronic morbidities or even organ impairment. Prolonged exposure can lead to premature death.
+          </p>
+        </div>
+        <div className="flex  p-2 border rounded shadow-md justify-center items-center divs">
+          <img
+            src="https://www.aqi.in/assets/images/cartton_shape_5.webp"
+            alt="Unhealthy air quality"
+            className="w-20 h-20"
+          />
+          <div className="text-red-500 font-bold m-3 ">Unhealthy (201-300)</div>
+          <p className="text-gray-500">
+            Exposure to air can cause chronic morbidities or even organ impairment. Prolonged exposure can lead to premature death.
+          </p>
+        </div>
+        <div className="flex  p-2 border rounded shadow-md justify-center items-center divs">
+          <img
+            src="https://www.aqi.in/assets/images/cartton_shape_6.webp"
+            alt="Hazardous air quality"
+            className="w-20 h-20"
+          />
+          <div className="text-green-500 font-bold m-3 ">Hazardous (401-500)</div>
+          <p className="text-gray-500">
+            Hazardous air quality. Everyone is at risk.
+          </p>
+        </div>
+      </div>
+    </div>
+  
       </div>
     </>
   );
 }
+
 export default Dashboard;
