@@ -105,10 +105,15 @@ function Admin(props) {
           <Sidebar
   routes={routes}
   logo={{
-    outterLink: "https://www.creative-tim.com/",
     text: "CSML",
-    imgSrc: "https://g.co/kgs/77HMtgo",
+    imgSrc: "https://bworld.digital/wp-content/uploads/2021/06/CSML-LOGO-web.png",
+    style: {
+      width: "200px", // Adjust width as needed
+      height: "auto"  // Maintain aspect ratio
+    }
   }}
+  
+  
   toggleSidebar={toggleSidebar}
 />
 
