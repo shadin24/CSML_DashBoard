@@ -24,7 +24,7 @@
   
   .inner-round-2 {
     padding: 10px;
-    background: #74f095;
+    background: #ffffff;
     height: 100px;
     width: 100px;
     border-radius: 50%;
@@ -44,7 +44,7 @@
   }
   
   .bg-yellow-500 {
-    background-color: #FFEB3B;
+    background-color: #a29523;
   }
   
   .bg-red-500 {

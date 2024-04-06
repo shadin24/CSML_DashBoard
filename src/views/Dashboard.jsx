@@ -67,6 +67,22 @@ function Dashboard(props) {
     });
   }, []);
 
+
+  function classify(value) {
+    if (value< 50) {
+        return "Good"; // Air quality is good
+    } else if (value >= 50 && value <= 100) {
+        return "Moderate"; // Air quality is moderate
+    } else if (value >= 100 && value <= 200) {
+        return "Poor"; // Air quality is poorvalue
+    } else if (value >= 200 && value <= 300) {
+        return "Unhealthy"; // Air quality is unhealthy
+    } else {
+        return "Hazardous"; // Air quality is hazardous
+    }
+}
+const classification = classify(AQIValue);
+
   const [bigChartData, setbigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
     setbigChartData(name);
@@ -104,7 +120,7 @@ function Dashboard(props) {
                     id="myRange"
                   />
                   <h3>AQI</h3>
-                  <p>Good</p>
+                  <p>{classification}</p>
                 </div>
               </CardBody>
             </Card>
@@ -254,10 +270,12 @@ function Dashboard(props) {
                     className={`inner-round-2 ${colorClass}`}
                     style={{ display: "flex", flexDirection: "column" }}
                   >
-                    <span style={{ color: "white", fontWeight: "bold", textTransform: "uppercase" }}>
+                   <span style={{ color: "white", fontWeight: "bolder", textTransform: "uppercase", fontSize: "1.8em" }}>{item?.value}</span>
+
+                    <span style={{  textTransform: "uppercase",color:"black"}}>
                       {item?.title}
                     </span>
-                    <span>{item?.value}</span>
+                    
                   </div>
                 </div>
               </div>
