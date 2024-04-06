@@ -1,39 +1,28 @@
 import React, { useState } from "react";
 import { Card, CardHeader, CardBody, CardTitle, Table, Row, Col } from "reactstrap";
 import { Line } from "react-chartjs-2";
+import { fetchChartData } from "../variables/charts.js";
 
-function Tables() {
+
+async function fetchData() {
+  try {
+    const response = await fetch('https://air-backend-yesb.onrender.com/');
+    const responseData = await response.json(); // Get response as JSON
+    console.log(responseData);
+    return responseData
+  }catch(e){
+    console.log(e)
+  }
+}
+
+const apiData=await fetchData()
+console.log(apiData)
+function  Tables() {
   // Sample data for past five days
   const [selectedDate, setSelectedDate] = useState(null);
+  
 
-  const pastFiveDaysData = [
-    { date: "2024-03-15", sensors: [
-        { id: 1, location: "Kalamassery", AQI: 10, SO2: 10, NO2: 10, CO: 10, PM10: 10, PM25: 10 },
-        { id: 2, location: "Edapally", AQI: 12, SO2: 11, NO2: 9, CO: 10, PM10: 10, PM25: 10 },
-        { id: 3, location: "Kaloor", AQI: 9, SO2: 10, NO2: 10, CO: 10, PM10: 10, PM25: 10 }
-    ] },
-    { date: "2024-03-16", sensors: [
-      { id: 1, location: "Kalamassery", AQI: 10, SO2: 10, NO2: 2, CO: 10, PM10: 10, PM25: 10 },
-      { id: 2, location: "Edapally", AQI: 12, SO2: 11, NO2: 9, CO: 10, PM10: 10, PM25: 10 },
-      { id: 3, location: "Kaloor", AQI: 9, SO2: 10, NO2: 10, CO: 10, PM10: 10, PM25: 10 }
-  ] },
-  { date: "2024-03-17", sensors: [
-    { id: 1, location: "Kalamassery", AQI: 10, SO2: 10, NO2: 4, CO: 10, PM10: 10, PM25: 10 },
-    { id: 2, location: "Edapally", AQI: 12, SO2: 11, NO2: 9, CO: 10, PM10: 10, PM25: 10 },
-    { id: 3, location: "Kaloor", AQI: 9, SO2: 10, NO2: 10, CO: 10, PM10: 10, PM25: 10 }
-] },
-{ date: "2024-03-18", sensors: [
-  { id: 1, location: "Kalamassery", AQI: 10, SO2: 10, NO2: 6, CO: 10, PM10: 10, PM25: 10 },
-  { id: 2, location: "Edapally", AQI: 12, SO2: 11, NO2: 9, CO: 10, PM10: 10, PM25: 10 },
-  { id: 3, location: "Kaloor", AQI: 9, SO2: 10, NO2: 10, CO: 10, PM10: 10, PM25: 10 }
-] },
-{ date: "2024-03-19", sensors: [
-  { id: 1, location: "Kalamassery", AQI: 10, SO2: 10, NO2: 1, CO: 10, PM10: 10, PM25: 10 },
-  { id: 2, location: "Edapally", AQI: 12, SO2: 11, NO2: 9, CO: 10, PM10: 10, PM25: 10 },
-  { id: 3, location: "Kaloor", AQI: 9, SO2: 16, NO2: 7, CO: 9, PM10: 10, PM25: 10 }
-] },
-    // Include data for other days
-  ];
+  
 
   // Function to handle date selection from dropdown
   const handleDateSelect = (event) => {
@@ -44,22 +33,31 @@ function Tables() {
   return (
     <div className="content">
       <Row>
-        <Col md="12">
-          <Card>
-            <CardHeader>
-              <CardTitle tag="h4">Select Date</CardTitle>
-            </CardHeader>
-            <CardBody>
-              <select onChange={handleDateSelect} value={selectedDate || ""}>
-                <option value="">-- Select Date --</option>
-                {pastFiveDaysData.map((data) => (
-                  <option key={data.date} value={data.date}>{data.date}</option>
-                ))}
-              </select>
-            </CardBody>
-          </Card>
-        </Col>
-      </Row>
+  <Col md="12">
+    <Card>
+      <CardHeader>
+        <CardTitle tag="h4">Select Date</CardTitle>
+      </CardHeader>
+      <CardBody>
+  <select onChange={handleDateSelect} value={selectedDate || ""}>
+    <option value="">-- Select Date --</option>
+    {Object.values(apiData).reduce((uniqueDates, item) => {
+      if (!uniqueDates.includes(item.date)) {
+        uniqueDates.push(item.date);
+      }
+      return uniqueDates;
+    }, []).map(date => (
+      <option key={date} value={date}>
+        {date}
+      </option>
+    ))}
+  </select>
+</CardBody>
+
+    </Card>
+  </Col>
+</Row>
+
       {selectedDate && (
         <Row>
           <Col md="12">
@@ -71,86 +69,27 @@ function Tables() {
                 <Table className="tablesorter" responsive>
                   <thead className="text-primary">
                     <tr>
-                      <th>Location</th>
-                      <th>AQI</th>
-                      <th>SO2</th>
+                      <th>PM1</th>
+                      <th>PM2.5</th>
+                      <th>PM10</th>
                       <th>NO2</th>
-                      <th>CO</th>
-                      <th>PM 10</th>
-                      <th>PM 2.5</th>
+                      
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>Kalamassery</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
                     
-                    </tr>
-                    <tr>
-                      <td>Kalamassery</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      
-                    </tr>
-                    <tr>
-                      <td>Kalamassery</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      
-                    </tr>
-                    <tr>
-                      <td>Kalamassery</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      
-                    </tr>
-                    <tr>
-                      <td>Kalamassery</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      
-                    </tr>
-                    <tr>
-                      <td>Kalamassery</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                     
-                    </tr>
-                    <tr>
-                      <td>Kalamassery</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      <td>10</td>
-                      <td>10</td>
-                      <td >10</td>
-                      
-                    </tr>
+                    {Object.keys(apiData).map(key => (
+            apiData[key].date==selectedDate&&(
+              <tr >
+                            
+                            <td>{apiData[key].Pm1}</td>
+                            <td>{apiData[key].pm2}</td>
+                            <td>{apiData[key].pm10}</td>
+                            <td>{apiData[key].no2}</td>
+                            
+                          </tr>
+            )
+          ))}
                   </tbody>
                 </Table>
               </CardBody>
@@ -160,18 +99,18 @@ function Tables() {
       )}
       {selectedDate && (
         <Row>
-          {pastFiveDaysData.map((data) => (
-            data.date === selectedDate && (
-              data.sensors.map((sensor) => (
-                <Col key={sensor.id} md="6">
+          {Object.keys(apiData).map(key => (
+            apiData[key].date === selectedDate && (
+              
+                <Col  md="6">
                   <Card>
                     <CardHeader>
-                      <CardTitle tag="h4">{sensor.location} - Sensor {sensor.id}</CardTitle>
+                      <CardTitle tag="h4">Data</CardTitle>
                     </CardHeader>
                     <CardBody>
                       <Line
                         data={{
-                          labels: ["AQI", "SO2", "NO2", "CO", "PM10", "PM2.5"],
+                          labels: ["PM1","PM2.5","PM10","NO2"],
                           datasets: [
                             {
                               label: "Readings",
@@ -192,7 +131,7 @@ function Tables() {
                               pointHoverBorderWidth: 2,
                               pointRadius: 1,
                               pointHitRadius: 10,
-                              data: [sensor.AQI, sensor.SO2, sensor.NO2, sensor.CO, sensor.PM10, sensor.PM25]
+                              data: [apiData[key].Pm1,apiData[key].pm2,apiData[key].pm10,apiData[key].no2]
                             }
                           ]
                         }}
@@ -200,8 +139,8 @@ function Tables() {
                     </CardBody>
                   </Card>
                 </Col>
-              ))
-            )
+              )
+            
           ))}
         </Row>
       )}
