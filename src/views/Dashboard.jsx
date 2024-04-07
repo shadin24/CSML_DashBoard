@@ -4,7 +4,12 @@ import classNames from "classnames";
 // react plugin used to create charts
 import { Line } from "react-chartjs-2";
 import { FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
-// reactstrap components
+import NotificationAlert from "react-notification-alert";
+import {
+  
+  chartData,
+} from "variables/charts.js";
+
 import {
   Button,
   ButtonGroup,
@@ -25,6 +30,48 @@ function Dashboard(props) {
   const [data, setData] = React.useState();
   const [AQIValue, setAQIValue] = React.useState();
 
+
+  let PM1 = chartData.pm1Values[chartData.pm1Values.length - 1];
+  let PM10 = chartData.pm10Values[chartData.pm10Values.length - 1];
+  let NO2 = chartData.no2Values[chartData.no2Values.length - 1];
+  let PM2 = chartData.pm2Values[chartData.pm2Values.length - 1];
+
+
+  const notificationAlertRef = React.useRef(null);
+  const notify = (place, param) => {
+    let message = "";
+    switch (param) {
+      case "PM1":
+        message = `Warning: PM 1 value is outside the recommended range`;
+        break;
+      case "PM10":
+        message = `Warning: PM 10 level is below the recommended `;
+        break;
+      case "NO2":
+        message = `Warning: NO2 level is above the recommended `;
+        break;
+      case "PM2":
+        message = `Warning: PM 2 level is above the recommended `;
+        break;
+      default:
+        message = "Unknown parameter";
+    }
+
+    const options = {
+      place: place,
+      message: (
+        <div>
+          <div>{message}</div>
+        </div>
+      ),
+      type: "danger",
+      icon: "tim-icons icon-bell-55",
+      autoDismiss: 7,
+    };
+
+    notificationAlertRef.current.notificationAlert(options);
+  };
+
   useEffect(() => {
     const fetchChartData = async () => {
       try {
@@ -42,16 +89,15 @@ function Dashboard(props) {
         }
 
         const objectArray = Object.keys(latestObject)
-        .filter(key => key !== "date")
-        .map(key => {
-          return {
+          .filter((key) => key !== "date")
+          .map((key) => {
+            return {
               title: key,
-              value: latestObject[key]
-          };
-      });
+              value: latestObject[key],
+            };
+          });
 
         return objectArray;
-
       } catch (error) {
         console.error("Error fetching chart data:", error);
         throw error;
@@ -67,29 +113,32 @@ function Dashboard(props) {
     });
   }, []);
 
-
   function classify(value) {
-    if (value< 50) {
-        return "Good"; // Air quality is good
+    if (value < 50) {
+      return "Good"; // Air quality is good
     } else if (value >= 50 && value <= 100) {
-        return "Moderate"; // Air quality is moderate
+      return "Moderate"; // Air quality is moderate
     } else if (value >= 100 && value <= 200) {
-        return "Poor"; // Air quality is poorvalue
+      return "Poor"; // Air quality is poor
     } else if (value >= 200 && value <= 300) {
-        return "Unhealthy"; // Air quality is unhealthy
+      return "Unhealthy"; // Air quality is unhealthy
     } else {
-        return "Hazardous"; // Air quality is hazardous
+      return "Hazardous"; // Air quality is hazardous
     }
-}
-const classification = classify(AQIValue);
+  }
+  const classification = classify(AQIValue);
 
-  const [bigChartData, setbigChartData] = React.useState("data1");
+  const [bigChartData, setBigChartData] = React.useState("data1");
   const setBgChartData = (name) => {
-    setbigChartData(name);
+    setBigChartData(name);
   };
+
   return (
     <>
       <div className="content">
+        <div className="react-notification-alert-container">
+          <NotificationAlert ref={notificationAlertRef} />
+        </div>
         <Row>
           <Col xs={4}>
             <Card className="card-chart card-chart-condition">
@@ -147,7 +196,10 @@ const classification = classify(AQIValue);
                         color="info"
                         id="0"
                         size="sm"
-                        onClick={() => setBgChartData("data1")}
+                        onClick={() => {
+                          setBgChartData("data1");
+                          
+                        }}
                         style={{
                           display: "flex",
                           justifyContent: "center",
@@ -155,7 +207,7 @@ const classification = classify(AQIValue);
                         }}
                       >
                         <span
-                          className=" d-none d-sm-block d-md-block d-lg-block d-xl-block"
+                          className="d-none d-sm-block d-md-block d-lg-block d-xl-block"
                           style={{ width: "50px" }}
                         >
                           PM 2.5
@@ -164,6 +216,7 @@ const classification = classify(AQIValue);
                           <i className="tim-icons icon-single-02" />
                         </span>
                       </Button>
+
                       <Button
                         color="info"
                         id="1"
@@ -206,7 +259,10 @@ const classification = classify(AQIValue);
                         className={classNames("btn-simple", {
                           active: bigChartData === "data4",
                         })}
-                        onClick={() => setBgChartData("data4")}
+                      onClick={() => {setBgChartData("data4");
+                      if (PM2 > 20) {
+                        notify("br", "NO2");
+                      }}}
                       >
                         <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
                           NO2
@@ -248,7 +304,14 @@ const classification = classify(AQIValue);
           </Col>
         </Row>
 
-        <Row className={"rounded-card-container"} style={{display: "flex", justifyContent: "center", flexWrap: "wrap"}}>
+        <Row
+          className={"rounded-card-container"}
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexWrap: "wrap",
+          }}
+        >
           {data?.map((item, index) => {
             // Define an array of colors
             const colors = [
@@ -268,14 +331,27 @@ const classification = classify(AQIValue);
                   <div
                     key={index}
                     className={`inner-round-2 ${colorClass}`}
-                    style={{ display: "flex", flexDirection: "column" }}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                    }}
                   >
-                   <span style={{ color: "white", fontWeight: "bolder", textTransform: "uppercase", fontSize: "1.8em" }}>{item?.value}</span>
+                    <span
+                      style={{
+                        color: "white",
+                        fontWeight: "bolder",
+                        textTransform: "uppercase",
+                        fontSize: "1.8em",
+                      }}
+                    >
+                      {item?.value}
+                    </span>
 
-                    <span style={{  textTransform: "uppercase",color:"black"}}>
+                    <span
+                      style={{ textTransform: "uppercase", color: "black" }}
+                    >
                       {item?.title}
                     </span>
-                    
                   </div>
                 </div>
               </div>
@@ -295,7 +371,7 @@ const classification = classify(AQIValue);
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <div className="flex  p-2 border rounded shadow-md justify-center items-center divs">
+            <div className="flex p-2 border rounded shadow-md justify-center items-center divs">
               <img
                 src="https://www.aqi.in/assets/images/cartton_shape_4.webp"
                 alt="Good air quality"
@@ -307,7 +383,7 @@ const classification = classify(AQIValue);
                 any health risk.
               </p>
             </div>
-            <div className="flex  p-2 border rounded shadow-md justify-center items-center divs">
+            <div className="flex p-2 border rounded shadow-md justify-center items-center divs">
               <img
                 src="https://www.aqi.in/assets/images/cartton_shape_3.webp"
                 alt="Moderate air quality"
@@ -321,7 +397,7 @@ const classification = classify(AQIValue);
                 threat to sensitive individuals.
               </p>
             </div>
-            <div className="flex  p-2 border rounded shadow-md justify-center items-center divs">
+            <div className="flex p-2 border rounded shadow-md justify-center items-center divs">
               <img
                 src="https://www.aqi.in/assets/images/cartton_shape_2.webp"
                 alt="Poor air quality"
@@ -336,7 +412,7 @@ const classification = classify(AQIValue);
                 elderly.
               </p>
             </div>
-            <div className="flex  p-2 border rounded shadow-md justify-center items-center divs">
+            <div className="flex p-2 border rounded shadow-md justify-center items-center divs">
               <img
                 src="https://www.aqi.in/assets/images/cartton_shape_5.webp"
                 alt="Unhealthy air quality"
@@ -350,7 +426,7 @@ const classification = classify(AQIValue);
                 impairment. Prolonged exposure can lead to premature death.
               </p>
             </div>
-            <div className="flex  p-2 border rounded shadow-md justify-center items-center divs">
+            <div className="flex p-2 border rounded shadow-md justify-center items-center divs">
               <img
                 src="https://www.aqi.in/assets/images/cartton_shape_5.webp"
                 alt="Unhealthy air quality"
@@ -364,7 +440,7 @@ const classification = classify(AQIValue);
                 impairment. Prolonged exposure can lead to premature death.
               </p>
             </div>
-            <div className="flex  p-2 border rounded shadow-md justify-center items-center divs">
+            <div className="flex p-2 border rounded shadow-md justify-center items-center divs">
               <img
                 src="https://www.aqi.in/assets/images/cartton_shape_6.webp"
                 alt="Hazardous air quality"
@@ -380,6 +456,7 @@ const classification = classify(AQIValue);
           </div>
         </div>
       </div>
+      <NotificationAlert ref={notificationAlertRef} />
     </>
   );
 }
