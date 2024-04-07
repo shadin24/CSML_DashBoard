@@ -53,7 +53,7 @@ function Sidebar(props) {
           onClick={props.toggleSidebar}
         >
           <div className="logo-img">
-            <img src="https://bworld.digital/wp-content/uploads/2021/06/CSML-LOGO-web.png" alt="react-logo" />
+            <img src="https://bworld.digital/wp-content/uploads/2021/06/CSML-LOGO-web.png" alt="logo" />
           </div>
         </a>
       );
@@ -132,8 +132,7 @@ function Sidebar(props) {
 }
 
 Sidebar.propTypes = {
-  // if true, then instead of the routes[i].name, routes[i].rtlName will be rendered
-  // insde the links of this component
+
   rtlActive: PropTypes.bool,
   routes: PropTypes.arrayOf(PropTypes.object),
   logo: PropTypes.shape({
