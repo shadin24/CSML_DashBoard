@@ -76,7 +76,7 @@ function Dashboard(props) {
 
     const fetchChartData = async () => {
       try {
-        const url = "https://io.adafruit.com/api/v2/CSML/feeds/dust/data?x-aio-key=aio_VKNV76EVucoEaiqbO27Z1SMrJnFB"
+        const url = 
 
         const response = await fetch(url);
         const responseData = await response.json();
