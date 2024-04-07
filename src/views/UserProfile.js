@@ -1,7 +1,7 @@
 
 import React from "react";
 
-// reactstrap components
+
 import {
   Button,
   Card,
@@ -16,6 +16,32 @@ import {
   Col,
 } from "reactstrap";
 
+const metroStations = [
+  "Aluva",
+  "Pulinchodu",
+  "Companypady",
+  "Ambattukavu",
+  "Muttom",
+  "Kalamassery",
+  "Cusat",
+  "Pathadippalam",
+  "Edapally",
+  "Changampuzha Park",
+  "Palarivattom",
+  "JLN Stadium",
+  "Kaloor",
+  "Town Hall",
+  "Maharaja's College",
+  "MG Road",
+  "Jos Junction",
+  "Lissie",
+  "Ernakulam South",
+  "Kadavanthra",
+  "Elamkulam",
+  "Vyttila",
+  "Thykoodam",
+];
+
 function UserProfile() {
   return (
     <>
@@ -28,30 +54,20 @@ function UserProfile() {
               </CardHeader>
               <CardBody>
                 <Form>
+                  
                   <Row>
-                    <Col className="pr-md-1" md="5">
+                    <Col className="pr-md-1" md="6">
                       <FormGroup>
-                        <label>Company (disabled)</label>
+                        <label>Name</label>
                         <Input
-                          defaultValue="Creative Code Inc."
-                          disabled
-                          placeholder="Company"
+                          defaultValue="srishant"
+                          placeholder="Com"
                           type="text"
                         />
                       </FormGroup>
                     </Col>
-                    <Col className="px-md-1" md="3">
-                      <FormGroup>
-                        <label>Username</label>
-                        <Input
-                          defaultValue="Srishant123"
-                          placeholder="Username"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="pl-md-1" md="4">
-                      <FormGroup>
+                    <Col className="pl-md-1" md="6">
+                    <FormGroup>
                         <label htmlFor="exampleInputEmail1">
                           Email address
                         </label>
@@ -60,79 +76,41 @@ function UserProfile() {
                     </Col>
                   </Row>
                   <Row>
-                    <Col className="pr-md-1" md="6">
-                      <FormGroup>
-                        <label>First Name</label>
-                        <Input
-                          defaultValue="srishan"
-                          placeholder="Company"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="pl-md-1" md="6">
-                      <FormGroup>
-                        <label>Last Name</label>
-                        <Input
-                          defaultValue="Jayan"
-                          placeholder="Last Name"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                  </Row>
-                  <Row>
                     <Col md="12">
-                      <FormGroup>
-                        <label>Address</label>
+                    <FormGroup>
+                        <label for="location">Location</label>
                         <Input
-                          defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                          placeholder="Home Address"
-                          type="text"
-                        />
+                          type="select"
+                          name="location"
+                          id="location"
+                          defaultValue="Select a metro station"
+                        >
+                          <option disabled>Select nearest  a metro station</option>
+                          {metroStations.map((station, index) => (
+                            <option key={index} value={station}>
+                              {station}
+                            </option>
+                          ))}
+                        </Input>
                       </FormGroup>
                     </Col>
                   </Row>
                   <Row>
                     <Col className="pr-md-1" md="4">
                       <FormGroup>
-                        <label>City</label>
+                        <label>Phone</label>
                         <Input
-                          defaultValue="Kochi"
+                          defaultValue="987654321"
                           placeholder=""
-                          type="text"
+                          type="nu"
                         />
                       </FormGroup>
                     </Col>
-                    <Col className="px-md-1" md="4">
-                      <FormGroup>
-                        <label>Country</label>
-                        <Input
-                          defaultValue="India"
-                          placeholder="Country"
-                          type="text"
-                        />
-                      </FormGroup>
-                    </Col>
-                    <Col className="pl-md-1" md="4">
-                      <FormGroup>
-                        <label>Postal Code</label>
-                        <Input placeholder="ZIP Code" type="number" />
-                      </FormGroup>
-                    </Col>
+                    
                   </Row>
                   <Row>
                     <Col md="8">
-                      <FormGroup>
-                        <label>About Me</label>
-                        <Input
-                          cols="80"
-                          defaultValue="Air Quality Monitoring System"
-                          placeholder="Here can be your description"
-                          rows="4"
-                          type="textarea"
-                        />
-                      </FormGroup>
+                      
                     </Col>
                   </Row>
                 </Form>
@@ -159,27 +137,15 @@ function UserProfile() {
                       className="avatar"
                       src=''
                     />
-                    <h5 className="title">Srishant Jaya</h5>
+                    <h5 className="title">Srishant</h5>
                   </a>
-                  <p className="description">Ceo/Co-Founder</p>
+                  <p className="description">Aluva</p>
                 </div>
                 <div className="card-description">
                  
                 </div>
               </CardBody>
-              <CardFooter>
-                <div className="button-container">
-                  <Button className="btn-icon btn-round" color="facebook">
-                    <i className="fab fa-facebook" />
-                  </Button>
-                  <Button className="btn-icon btn-round" color="twitter">
-                    <i className="fab fa-twitter" />
-                  </Button>
-                  <Button className="btn-icon btn-round" color="google">
-                    <i className="fab fa-google-plus" />
-                  </Button>
-                </div>
-              </CardFooter>
+              
             </Card>
           </Col>
         </Row>
