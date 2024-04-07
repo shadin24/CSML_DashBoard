@@ -4093,7 +4093,7 @@ input[type="button"].btn-block {
   ~ .custom-control-label::before {
   border-color: #e14eca;
   background-color: #e14eca;
-  box-shadow: ;
+  box-shadow: navy;
 }
 
 .custom-checkbox
@@ -16855,7 +16855,7 @@ hr {
   display: block;
   line-height: 23px;
   z-index: 1;
-  color: rgba(255, );
+  color: rgba(255, 255, 255, 0.8);
 }
 .sidebar
   .sidebar-wrapper
@@ -16907,7 +16907,7 @@ hr {
   z-index: 1;
   display: inherit;
   line-height: 24px;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(255, 255, 255, 0.8);
 }
 .sidebar .sidebar-wrapper > .nav [data-toggle="collapse"] ~ div > ul > li > a i,
 .sidebar

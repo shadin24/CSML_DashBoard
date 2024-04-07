@@ -222,7 +222,7 @@ async function fetchChartDataInterval() {
   setInterval(async () => {
       chartData = await fetchChartData();
       console.log("Updated chart data:", chartData);
-  }, 1000); // Interval in milliseconds (5 seconds)
+  }, 10000); // Interval in milliseconds (5 seconds)
 }
 
 fetchChartDataInterval();
@@ -234,7 +234,7 @@ let chartExample1 = {
   data4: (canvas) => generateDataset1(canvas, chartData.pm2Values),
 
   options: chart1_2_options,
-}; // Initialize chartExample1
+};
 
 
 

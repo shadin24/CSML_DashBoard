@@ -73,45 +73,52 @@ function Dashboard(props) {
   };
 
   useEffect(() => {
+
     const fetchChartData = async () => {
       try {
-        const response = await fetch("https://air-backend-yesb.onrender.com/");
-        const responseData = await response.json(); // Get response as JSON
+        const url = "https://io.adafruit.com/api/v2/CSML/feeds/dust/data?x-aio-key=aio_VKNV76EVucoEaiqbO27Z1SMrJnFB"
 
-        let latestDate = "";
-        let latestObject = null;
+        const response = await fetch(url);
+        const responseData = await response.json();
+    
+        console.log("->", responseData)
 
-        for (const key in responseData) {
-          if (!latestDate || responseData[key].date > latestDate) {
-            latestDate = responseData[key].date;
-            latestObject = responseData[key];
-          }
-        }
+        return responseData
+    
+        // const keys = Object.keys(responseData);
+        // const lastKey = keys[keys.length - 1];
+    
+        // const latestObject = responseData[lastKey];
+    
+        // const objectArray = Object.keys(latestObject)
+        //   .filter((key) => key !== "date")
+        //   .map((key) => {
+        //     return {
+        //       title: key,
+        //       value: latestObject[key],
+        //     };
+        //   });
 
-        const objectArray = Object.keys(latestObject)
-          .filter((key) => key !== "date")
-          .map((key) => {
-            return {
-              title: key,
-              value: latestObject[key],
-            };
-          });
-
-        return objectArray;
+        // return objectArray;
       } catch (error) {
         console.error("Error fetching chart data:", error);
         throw error;
       }
     };
+    
 
     fetchChartData().then((data) => {
       console.log("Fetched dashboard data", data);
+      data.map((item) => {
+        setData([...prev])
+      })
       const totalSum = data.reduce((acc, obj) => acc + obj.value, 0);
       const average = totalSum / data.length;
       setAQIValue(average);
       setData(data);
     });
   }, []);
+
 
   function classify(value) {
     if (value < 50) {

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardHeader, CardBody, CardTitle, Table, Row, Col } from "reactstrap";
-import { Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 import { fetchChartData } from "../variables/charts.js";
-
 
 async function fetchData() {
   try {
@@ -10,21 +9,23 @@ async function fetchData() {
     const responseData = await response.json(); // Get response as JSON
     console.log(responseData);
     return responseData
-  }catch(e){
+  } catch(e) {
     console.log(e)
   }
 }
 
-const apiData=await fetchData()
-console.log(apiData)
-function  Tables() {
-  // Sample data for past five days
+function Tables() {
   const [selectedDate, setSelectedDate] = useState(null);
-  
+  const [apiData, setApiData] = useState(null);
 
-  
+  useEffect(() => {
+    const getData = async () => {
+      const data = await fetchData();
+      setApiData(data);
+    };
+    getData();
+  }, []);
 
-  // Function to handle date selection from dropdown
   const handleDateSelect = (event) => {
     const selectedDate = event.target.value;
     setSelectedDate(selectedDate);
@@ -33,30 +34,29 @@ function  Tables() {
   return (
     <div className="content">
       <Row>
-  <Col md="12">
-    <Card>
-      <CardHeader>
-        <CardTitle tag="h4">Select Date</CardTitle>
-      </CardHeader>
-      <CardBody>
-  <select onChange={handleDateSelect} value={selectedDate || ""}>
-    <option value="">-- Select Date --</option>
-    {Object.values(apiData).reduce((uniqueDates, item) => {
-      if (!uniqueDates.includes(item.date)) {
-        uniqueDates.push(item.date);
-      }
-      return uniqueDates;
-    }, []).map(date => (
-      <option key={date} value={date}>
-        {date}
-      </option>
-    ))}
-  </select>
-</CardBody>
-
-    </Card>
-  </Col>
-</Row>
+        <Col md="12">
+          <Card>
+            <CardHeader>
+              <CardTitle tag="h4">Select Date</CardTitle>
+            </CardHeader>
+            <CardBody>
+              <select onChange={handleDateSelect} value={selectedDate || ""}>
+                <option value="">-- Select Date --</option>
+                {apiData && Object.values(apiData).reduce((uniqueDates, item) => {
+                  if (!uniqueDates.includes(item.date)) {
+                    uniqueDates.push(item.date);
+                  }
+                  return uniqueDates;
+                }, []).map(date => (
+                  <option key={date} value={date}>
+                    {date}
+                  </option>
+                ))}
+              </select>
+            </CardBody>
+          </Card>
+        </Col>
+      </Row>
 
       {selectedDate && (
         <Row>
@@ -73,23 +73,19 @@ function  Tables() {
                       <th>PM2.5</th>
                       <th>PM10</th>
                       <th>NO2</th>
-                      
                     </tr>
                   </thead>
                   <tbody>
-                    
-                    {Object.keys(apiData).map(key => (
-            apiData[key].date==selectedDate&&(
-              <tr >
-                            
-                            <td>{apiData[key].Pm1}</td>
-                            <td>{apiData[key].pm2}</td>
-                            <td>{apiData[key].pm10}</td>
-                            <td>{apiData[key].no2}</td>
-                            
-                          </tr>
-            )
-          ))}
+                    {apiData && Object.keys(apiData).map(key => (
+                      apiData[key].date === selectedDate && (
+                        <tr key={key}>
+                          <td>{apiData[key].Pm1}</td>
+                          <td>{apiData[key].pm2}</td>
+                          <td>{apiData[key].pm10}</td>
+                          <td>{apiData[key].no2}</td>
+                        </tr>
+                      )
+                    ))}
                   </tbody>
                 </Table>
               </CardBody>
@@ -97,51 +93,67 @@ function  Tables() {
           </Col>
         </Row>
       )}
+
       {selectedDate && (
         <Row>
-          {Object.keys(apiData).map(key => (
-            apiData[key].date === selectedDate && (
-              
-                <Col  md="6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle tag="h4">Data</CardTitle>
-                    </CardHeader>
-                    <CardBody>
-                      <Line
-                        data={{
-                          labels: ["PM1","PM2.5","PM10","NO2"],
-                          datasets: [
-                            {
-                              label: "Readings",
-                              fill: false,
-                              lineTension: 0.1,
-                              backgroundColor: "rgba(75,192,192,0.4)",
-                              borderColor: "rgba(75,192,192,1)",
-                              borderCapStyle: "round",
-                              borderDash: [],
-                              borderDashOffset: 0.0,
-                              borderJoinStyle: "miter",
-                              pointBorderColor: "rgba(75,192,192,1)",
-                              pointBackgroundColor: "#fff",
-                              pointBorderWidth: 1,
-                              pointHoverRadius: 5,
-                              pointHoverBackgroundColor: "rgba(75,192,192,1)",
-                              pointHoverBorderColor: "rgba(220,220,220,1)",
-                              pointHoverBorderWidth: 2,
-                              pointRadius: 1,
-                              pointHitRadius: 10,
-                              data: [apiData[key].Pm1,apiData[key].pm2,apiData[key].pm10,apiData[key].no2]
-                            }
-                          ]
-                        }}
-                      />
-                    </CardBody>
-                  </Card>
-                </Col>
-              )
-            
-          ))}
+          <Col md="12">
+            <Card>
+              <CardHeader>
+                <CardTitle tag="h4">Data</CardTitle>
+              </CardHeader>
+              <CardBody>
+                <Bar
+                  data={{
+                    labels: apiData && Object.keys(apiData).map(key => apiData[key].date), // Use date values as X-axis labels
+                    datasets: [
+                      {
+                        label: "PM1",
+                        backgroundColor: "rgba(255, 0, 0, 0.6)", // Red
+                        borderColor: "rgba(255, 0, 0, 1)",
+                        borderWidth: 1,
+                        data: apiData && Object.keys(apiData).map(key => apiData[key].Pm1)
+                      },
+                      {
+                        label: "PM2.5",
+                        backgroundColor: "rgba(0, 255, 0, 0.6)", // Green
+                        borderColor: "rgba(0, 255, 0, 1)",
+                        borderWidth: 1,
+                        data: apiData && Object.keys(apiData).map(key => apiData[key].pm2)
+                      },
+                      {
+                        label: "PM10",
+                        backgroundColor: "rgba(0, 0, 255, 0.6)", // Blue
+                        borderColor: "rgba(0, 0, 255, 1)",
+                        borderWidth: 1,
+                        data: apiData && Object.keys(apiData).map(key => apiData[key].pm10)
+                      },
+                      {
+                        label: "NO2",
+                        backgroundColor: "rgba(255, 255, 0, 0.6)", // Yellow
+                        borderColor: "rgba(255, 255, 0, 1)",
+                        borderWidth: 1,
+                        data: apiData && Object.keys(apiData).map(key => apiData[key].no2)
+                      }
+                    ]
+                  }}
+                  options={{
+                    scales: {
+                      xAxes: [{ stacked: true }],
+                      yAxes: [{ stacked: true }]
+                    },
+                    legend: {
+                      display: true, // Display legend
+                      position: 'top', // Position of legend
+                      labels: {
+                        fontColor: '#333', // Color of legend text
+                        fontSize: 12 // Size of legend text
+                      }
+                    }
+                  }}
+                />
+              </CardBody>
+            </Card>
+          </Col>
         </Row>
       )}
     </div>
