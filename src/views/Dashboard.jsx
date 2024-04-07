@@ -26,9 +26,13 @@ import { chartExample1 } from "variables/charts.js";
 
 import "./Dashboard.css";
 
+
+const ValueMap = ['PM1', 'PM10', 'NO2', 'PM2.5']
+
 function Dashboard(props) {
   const [data, setData] = React.useState();
   const [AQIValue, setAQIValue] = React.useState();
+  const [latestValue, setLatestValue] = React.useState();
 
 
   let PM1 = chartData.pm1Values[chartData.pm1Values.length - 1];
@@ -73,51 +77,38 @@ function Dashboard(props) {
   };
 
   useEffect(() => {
-
-    const fetchChartData = async () => {
+    const fetchData = async () => {
       try {
-        const url = 
-
+        const url = "https://io.adafruit.com/api/v2/CSML/feeds/dust/data?x-aio-key=aio_VKNV76EVucoEaiqbO27Z1SMrJnFB";
         const response = await fetch(url);
-        const responseData = await response.json();
-    
-        console.log("->", responseData)
-
-        return responseData
-    
-        // const keys = Object.keys(responseData);
-        // const lastKey = keys[keys.length - 1];
-    
-        // const latestObject = responseData[lastKey];
-    
-        // const objectArray = Object.keys(latestObject)
-        //   .filter((key) => key !== "date")
-        //   .map((key) => {
-        //     return {
-        //       title: key,
-        //       value: latestObject[key],
-        //     };
-        //   });
-
-        // return objectArray;
+        const data = await response.json();
+        console.log("->", data);
+        return data;
       } catch (error) {
         console.error("Error fetching chart data:", error);
         throw error;
       }
     };
-    
-
-    fetchChartData().then((data) => {
-      console.log("Fetched dashboard data", data);
-      data.map((item) => {
-        setData([...prev])
-      })
-      const totalSum = data.reduce((acc, obj) => acc + obj.value, 0);
-      const average = totalSum / data.length;
-      setAQIValue(average);
-      setData(data);
-    });
+  
+    const fetchDataAndUpdateState = () => {
+      fetchData().then((data) => {
+        setData(data.map((item) => item.value));
+        const a = data[0].value.split(",").map(Number);
+        console.log(a);
+        setLatestValue(a);
+        const totalSum = a?.reduce((acc, v) => acc + v, 0);
+        const average = totalSum / a.length;
+        setAQIValue(average);
+      });
+    };
+  
+    fetchDataAndUpdateState();
+  
+    const intervalId = setInterval(fetchDataAndUpdateState, 5000);
+  
+    return () => clearInterval(intervalId);
   }, []);
+  
 
 
   function classify(value) {
@@ -319,7 +310,7 @@ function Dashboard(props) {
             flexWrap: "wrap",
           }}
         >
-          {data?.map((item, index) => {
+          {latestValue?.map((item, index) => {
             // Define an array of colors
             const colors = [
               "bg-blue-500",
@@ -351,13 +342,13 @@ function Dashboard(props) {
                         fontSize: "1.8em",
                       }}
                     >
-                      {item?.value}
+                      {ValueMap[index]}
                     </span>
 
                     <span
                       style={{ textTransform: "uppercase", color: "black" }}
                     >
-                      {item?.title}
+                      {item}
                     </span>
                   </div>
                 </div>
